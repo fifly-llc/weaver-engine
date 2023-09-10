@@ -194,9 +194,8 @@ class WeaverEngine {
 
         this.updateCameraPosition();
         this.render();
-        requestAnimationFrame(this.update.bind(this));
-
         this.renderParticles(); // Render particles.
+        requestAnimationFrame(this.update.bind(this));
     }
 
     render() {
