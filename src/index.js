@@ -261,36 +261,6 @@ class GameObject {
         this.textColor = 'white'; // Text color.
     }
 
-    constructor(x, y, z, width, height, depth, model) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.width = width;
-        this.height = height;
-        this.depth = depth;
-
-        // Rendering properies.
-        this.visible = true;
-
-        // Asset properties.
-        this.model = model; // Reference to the 3D model.
-
-        // Mouse and touch input properties.
-        this.isMouseDown = false;
-        this.touchStartPos = { x: 0, y: 0 };
-
-        // Velocity and acceleration in 3D space.
-        this.velocity = { x: 0, y: 0, z: 0 };
-        this.acceleration = { x: 0, y: 0, z: 0 };
-
-        // UI properties.
-        this.isUI = false; // Indicates if the object is a UI element.
-        this.text = ''; // Text content for UI elements.
-        this.fontSize = 16; // Font size for text rendering.
-        this.fontFamily = 'Arial'; // Font family for text rendering.
-        this.textColor = 'white'; // Text color.
-    }
-
     // Calculate the AABB (Axis-Aligned Bounding Box) of the object.
     calculateAABB() {
         const halfWidth = this.width / 2;
