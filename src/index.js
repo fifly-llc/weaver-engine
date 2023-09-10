@@ -211,6 +211,11 @@ class WeaverEngine {
             gameObject.renderUI(this.context);
         });
     }
+
+    add(gameobject) {
+        // Add GameObject
+        this.gameObjects.push([gameobject]);
+    }
 }
 
 class Asset {
@@ -237,6 +242,9 @@ class GameObject {
         this.height = height;
         this.depth = depth;
 
+        // Rendering properties.
+        this.visible = true;
+
         // Mouse and touch input properties.
         this.isMouseDown = false;
         this.touchStartPos = { x: 0, y: 0 };
@@ -260,6 +268,9 @@ class GameObject {
         this.width = width;
         this.height = height;
         this.depth = depth;
+
+        // Rendering properies.
+        this.visible = true;
 
         // Asset properties.
         this.model = model; // Reference to the 3D model.
@@ -471,22 +482,24 @@ class GameObject {
     }
 
     render(context, camera) {
-        // Project and render the vertices of the cube.
-        const projectedVertices = this.vertices.map((vertex) => this.projectVertex(vertex, camera));
+        if (this.visible) {
+            // Project and render the vertices of the cube.
+            const projectedVertices = this.vertices.map((vertex) => this.projectVertex(vertex, camera));
 
-        context.strokeStyle = 'black'; // Example line color
-        context.lineWidth = 2;
+            context.strokeStyle = 'black'; // Example line color
+            context.lineWidth = 2;
 
-        for (const faceIndices of this.faces) {
-            context.beginPath();
-            for (let i = 0; i < faceIndices.length; i++) {
-                const vertex = projectedVertices[faceIndices[i]];
-                const nextVertex = projectedVertices[faceIndices[(i + 1) % faceIndices.length]];
-                context.moveTo(vertex.x, vertex.y);
-                context.lineTo(nextVertex.x, nextVertex.y);
+            for (const faceIndices of this.faces) {
+                context.beginPath();
+                for (let i = 0; i < faceIndices.length; i++) {
+                    const vertex = projectedVertices[faceIndices[i]];
+                    const nextVertex = projectedVertices[faceIndices[(i + 1) % faceIndices.length]];
+                    context.moveTo(vertex.x, vertex.y);
+                    context.lineTo(nextVertex.x, nextVertex.y);
+                }
+                context.closePath();
+                context.stroke();
             }
-            context.closePath();
-            context.stroke();
         }
     }
 }
