@@ -1,7 +1,7 @@
 {
   "name": "weaver-engine",
-  "version": "1.0.1",
-  "description": "A JavaScript game engine designed for the web.",
+  "version": "1.0.2",
+  "description": "A JavaScript game engine designed for web games.",
   "main": "src/index.js",
   "scripts": {
     "test": "cd test && npx serve"

@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the FiFly Redistributable Software License, version 1.0.
  * If a copy of the license was not distributed with this file, You can obtain one at https://fifly.org/FRSL/1.0/. */
 
-export class Game {
+class Game {
     constructor(canvas) {
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
@@ -219,7 +219,7 @@ export class Game {
     }
 }
 
-export class Asset {
+class Asset {
     constructor(type, file) {
         if (type === 'model') {
             if (!file.endsWith('.obj'))
@@ -237,7 +237,7 @@ export class Asset {
     }
 }
 
-export class GameObject {
+class GameObject {
     constructor(x, y, z, width, height, depth) {
         this.x = x;
         this.y = y;
@@ -478,7 +478,7 @@ export class GameObject {
     }
 }
 
-export class Camera {
+class Camera {
     constructor(canvasWidth, canvasHeight) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
@@ -542,7 +542,7 @@ export class Camera {
     }
 }
 
-export class Particle {
+class Particle {
     constructor(x, y, z, velocityX, velocityY, velocityZ, lifetime, color) {
         this.x = x;
         this.y = y;
@@ -600,7 +600,7 @@ export class Particle {
     }
 }
 
-export class Matrix4 {
+class Matrix4 {
     constructor() {
         this.elements = new Float32Array(16);
         this.identity();
@@ -654,7 +654,7 @@ export class Matrix4 {
     }
 }
 
-export class Vector3 {
+class Vector3 {
     constructor(x, y, z) {
         this.x = x || 0;
         this.y = y || 0;
@@ -682,3 +682,5 @@ export class Vector3 {
         return new Vector3(v.x / length, v.y / length, v.z / length);
     }
 }
+
+module.exports = Game, GameObject, Camera, Vector3, Matrix4, Asset, Particle;
