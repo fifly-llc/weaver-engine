@@ -1,0 +1,22 @@
+{
+  "name": "weaver-engine",
+  "version": "1.0.0",
+  "description": "A JavaScript game engine designed for the web.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "cd test && npx serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fifly-llc/weaver-engine.git"
+  },
+  "keywords": [
+    "weaver"
+  ],
+  "author": "FiFly LLC",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/fifly-llc/weaver-engine/issues"
+  },
+  "homepage": "https://github.com/fifly-llc/weaver-engine#readme"
+}
