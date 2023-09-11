@@ -1,4 +1,4 @@
-import 'https://cdn.jsdelivr.net/npm/weaver-engine@latest/src/index.js';
+import { Game, GameObject } from 'https://cdn.jsdelivr.net/npm/weaver-engine@latest/src/index.js';
 
 let canvas = document.createElement('canvas');
 canvas = document.body.appendChild(canvas);

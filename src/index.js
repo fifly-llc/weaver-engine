@@ -683,4 +683,4 @@ class Vector3 {
     }
 }
 
-module.exports = Game, GameObject, Camera, Vector3, Matrix4, Asset, Particle;
+export { Game, GameObject, Particle, Camera, Asset, Vector3, Matrix4 };
