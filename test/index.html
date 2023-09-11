@@ -7,7 +7,7 @@
 
 <body>
     <script>
-        export class Game {
+        class Game {
             constructor(canvas) {
                 this.canvas = canvas;
                 this.context = canvas.getContext('2d');
@@ -225,7 +225,7 @@
             }
         }
 
-        export class Asset {
+        class Asset {
             constructor(type, file) {
                 if (type === 'model') {
                     if (!file.endsWith('.obj'))
@@ -243,7 +243,7 @@
             }
         }
 
-        export class GameObject {
+        class GameObject {
             constructor(x, y, z, width, height, depth) {
                 this.x = x;
                 this.y = y;
@@ -484,7 +484,7 @@
             }
         }
 
-        export class Camera {
+        class Camera {
             constructor(canvasWidth, canvasHeight) {
                 this.canvasWidth = canvasWidth;
                 this.canvasHeight = canvasHeight;
@@ -548,7 +548,7 @@
             }
         }
 
-        export class Particle {
+        class Particle {
             constructor(x, y, z, velocityX, velocityY, velocityZ, lifetime, color) {
                 this.x = x;
                 this.y = y;
@@ -606,7 +606,7 @@
             }
         }
 
-        export class Matrix4 {
+        class Matrix4 {
             constructor() {
                 this.elements = new Float32Array(16);
                 this.identity();
@@ -660,7 +660,7 @@
             }
         }
 
-        export class Vector3 {
+        class Vector3 {
             constructor(x, y, z) {
                 this.x = x || 0;
                 this.y = y || 0;
