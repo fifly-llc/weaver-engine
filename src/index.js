@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the FiFly Redistributable Software License, version 1.0.
  * If a copy of the license was not distributed with this file, You can obtain one at https://fifly.org/FRSL/1.0/. */
 
-export class WeaverEngine {
+export class Game {
     constructor(canvas) {
         this.canvas = canvas;
         this.context = canvas.getContext('2d');

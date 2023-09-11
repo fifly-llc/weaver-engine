@@ -6,9 +6,8 @@
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
     <script>
-        class WeaverEngine {
+        export class Game {
             constructor(canvas) {
                 this.canvas = canvas;
                 this.context = canvas.getContext('2d');
@@ -226,7 +225,7 @@
             }
         }
 
-        class Asset {
+        export class Asset {
             constructor(type, file) {
                 if (type === 'model') {
                     if (!file.endsWith('.obj'))
@@ -244,7 +243,7 @@
             }
         }
 
-        class GameObject {
+        export class GameObject {
             constructor(x, y, z, width, height, depth) {
                 this.x = x;
                 this.y = y;
@@ -353,8 +352,6 @@
 
             // Update the object's position and physics.
             update() {
-                console.log('GameObject update method called.');
-
                 // Apply acceleration to velocity.
                 this.velocity.x += this.acceleration.x;
                 this.velocity.y += this.acceleration.y;
@@ -487,7 +484,7 @@
             }
         }
 
-        class Camera {
+        export class Camera {
             constructor(canvasWidth, canvasHeight) {
                 this.canvasWidth = canvasWidth;
                 this.canvasHeight = canvasHeight;
@@ -551,7 +548,7 @@
             }
         }
 
-        class Particle {
+        export class Particle {
             constructor(x, y, z, velocityX, velocityY, velocityZ, lifetime, color) {
                 this.x = x;
                 this.y = y;
@@ -609,7 +606,7 @@
             }
         }
 
-        class Matrix4 {
+        export class Matrix4 {
             constructor() {
                 this.elements = new Float32Array(16);
                 this.identity();
@@ -663,7 +660,7 @@
             }
         }
 
-        class Vector3 {
+        export class Vector3 {
             constructor(x, y, z) {
                 this.x = x || 0;
                 this.y = y || 0;
@@ -692,16 +689,16 @@
             }
         }
 
-        function $(id) {
-            return document.getElementById(id);
-        }
 
-        //document.addEventListener("DOMContentLoaded", (event) => {
-        let game = new WeaverEngine($('canvas'));
+
+        let canvas = document.createElement('canvas');
+        canvas = document.body.appendChild(canvas);
+        canvas.style = "width: 100%; height: 100%; border: none; background-color: white;";
+
+        let game = new Game(canvas);
         let cube = new GameObject(0, 0, 0, 10, 10, 10);
         game.add(cube);
         game.start();
-        //});
     </script>
 </body>
 
