@@ -7,7 +7,7 @@
 
 <body>
     <canvas id="canvas"></canvas>
-    <script type="module">
+    <script>
         class WeaverEngine {
             constructor(canvas) {
                 this.canvas = canvas;
@@ -196,17 +196,15 @@
 
             update() {
                 // Update game logic here.
-                this.gameObjects.forEach((gameObject) => {
-                    gameObject.update();
+                this.gameObjects.forEach((object) => {
+                    object.update();
                 });
 
-                this.updateParticles(); // Render particles.
-
-                this.updateCameraPosition();
-                this.render();
-                requestAnimationFrame(this.update.bind(this));
-
+                this.updateParticles(); // Update particles.
+                this.updateCameraPosition(); // Update camera pos based on input
+                this.render(); // Render GameObjects
                 this.renderParticles(); // Render particles.
+                requestAnimationFrame(this.update.bind(this));
             }
 
             render() {
@@ -231,6 +229,9 @@
         class Asset {
             constructor(type, file) {
                 if (type === 'model') {
+                    if (!file.endsWith('.obj'))
+                        return;
+
                     this.file = fetch(file).then(async res => {
                         const str = await res.text();
                         return str;
@@ -238,7 +239,7 @@
                 } else if (type === 'audio') {
                     this.file = Audio(file);
                 } else {
-                    console.error("Asset type does not exist (this error was created by a game, not a user action)");
+                    console.error("Asset type does not exist.");
                 }
             }
         }
@@ -352,6 +353,8 @@
 
             // Update the object's position and physics.
             update() {
+                console.log('GameObject update method called.');
+
                 // Apply acceleration to velocity.
                 this.velocity.x += this.acceleration.x;
                 this.velocity.y += this.acceleration.y;
@@ -568,6 +571,8 @@
                 this.lifetime--;
 
                 // Apply gravity or other forces as needed.
+                if (!this.y < 0)
+                    this.velocityY--;
             }
 
             isAlive() {
@@ -691,12 +696,12 @@
             return document.getElementById(id);
         }
 
-        document.addEventListener("DOMContentLoaded", (event) => {
-            let game = new WeaverEngine($('canvas'));
-            let cube = new GameObject(0, 0, 0, 10, 10, 10);
-            game.add(cube);
-            game.start();
-        });
+        //document.addEventListener("DOMContentLoaded", (event) => {
+        let game = new WeaverEngine($('canvas'));
+        let cube = new GameObject(0, 0, 0, 10, 10, 10);
+        game.add(cube);
+        game.start();
+        //});
     </script>
 </body>
 

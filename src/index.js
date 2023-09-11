@@ -1,4 +1,7 @@
-class WeaverEngine {
+/* This Source Code Form is subject to the terms of the FiFly Redistributable Software License, version 1.0.
+ * If a copy of the license was not distributed with this file, You can obtain one at https://fifly.org/FRSL/1.0/. */
+
+export class WeaverEngine {
     constructor(canvas) {
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
@@ -186,14 +189,13 @@ class WeaverEngine {
 
     update() {
         // Update game logic here.
-        this.gameObjects.forEach((gameObject) => {
-            gameObject.update();
+        this.gameObjects.forEach((object) => {
+            object.update();
         });
 
-        this.updateParticles(); // Render particles.
-
-        this.updateCameraPosition();
-        this.render();
+        this.updateParticles(); // Update particles.
+        this.updateCameraPosition(); // Update camera pos based on input
+        this.render(); // Render GameObjects
         this.renderParticles(); // Render particles.
         requestAnimationFrame(this.update.bind(this));
     }
@@ -217,9 +219,12 @@ class WeaverEngine {
     }
 }
 
-class Asset {
+export class Asset {
     constructor(type, file) {
         if (type === 'model') {
+            if (!file.endsWith('.obj'))
+                return;
+
             this.file = fetch(file).then(async res => {
                 const str = await res.text();
                 return str;
@@ -227,12 +232,12 @@ class Asset {
         } else if (type === 'audio') {
             this.file = Audio(file);
         } else {
-            console.error("Asset type does not exist (this error was created by a game, not a user action)");
+            console.error("Asset type does not exist.");
         }
     }
 }
 
-class GameObject {
+export class GameObject {
     constructor(x, y, z, width, height, depth) {
         this.x = x;
         this.y = y;
@@ -473,7 +478,7 @@ class GameObject {
     }
 }
 
-class Camera {
+export class Camera {
     constructor(canvasWidth, canvasHeight) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
@@ -537,7 +542,7 @@ class Camera {
     }
 }
 
-class Particle {
+export class Particle {
     constructor(x, y, z, velocityX, velocityY, velocityZ, lifetime, color) {
         this.x = x;
         this.y = y;
@@ -557,6 +562,8 @@ class Particle {
         this.lifetime--;
 
         // Apply gravity or other forces as needed.
+        if (!this.y < 0)
+            this.velocityY--;
     }
 
     isAlive() {
@@ -593,7 +600,7 @@ class Particle {
     }
 }
 
-class Matrix4 {
+export class Matrix4 {
     constructor() {
         this.elements = new Float32Array(16);
         this.identity();
@@ -647,7 +654,7 @@ class Matrix4 {
     }
 }
 
-class Vector3 {
+export class Vector3 {
     constructor(x, y, z) {
         this.x = x || 0;
         this.y = y || 0;
