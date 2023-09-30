@@ -270,6 +270,21 @@ class GameObject {
             new Vector3(this.x + this.width / 2, this.y + this.height / 2, this.z + this.depth / 2),
             new Vector3(this.x - this.width / 2, this.y + this.height / 2, this.z + this.depth / 2),
         ];
+
+        this.faces = [
+            [0, 1, 2],
+            [0, 2, 3],
+            [4, 5, 6],
+            [4, 6, 7],
+            [0, 1, 5],
+            [0, 5, 4],
+            [1, 2, 6],
+            [1, 6, 5],
+            [2, 3, 7],
+            [2, 7, 6],
+            [3, 0, 4],
+            [3, 4, 7],
+        ];
     }
 
     calculateAABB() {

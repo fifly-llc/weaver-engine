@@ -1,6 +1,6 @@
 {
   "name": "weaver-engine",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A JavaScript game engine designed for web games.",
   "main": "src/index.web.js",
   "scripts": {
