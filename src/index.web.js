@@ -201,13 +201,13 @@ class Game {
     }
 
     render() {
-        const { context, canvas, gameObjects } = this;
+        const { context, canvas, gameObjects, camera } = this;
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         gameObjects.forEach(gameObject => {
-            gameObject.render(context);
-            gameObject.renderUI(context);
+            gameObject.render(context, camera);
+            gameObject.renderUI(context, camera);
         });
     }
 
