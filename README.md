@@ -1,6 +1,7 @@
 # Weaver Engine
 
-[![npm version](https://badge.fury.io/js/weaver-engine.svg)](https://badge.fury.io/js/weaver-engine)
+![npm version](https://img.shields.io/github/package-json/v/fifly-llc/weaver-engine)
+![npm downloads](https://img.shields.io/npm/dw/weaver-engine)
 ![GitHub contributors](https://img.shields.io/github/contributors/fifly-llc/weaver-engine)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/fifly-llc/weaver-engine)
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/fifly-llc/weaver-engine)

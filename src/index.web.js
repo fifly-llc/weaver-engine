@@ -347,12 +347,6 @@ class GameObject {
         this.x += this.velocity.x;
         this.y += this.velocity.y;
         this.z += this.velocity.z;
-
-        // Basic collision detection with another object.
-        // Assuming 'otherObject' is another GameObject.
-        if (this.checkCollision(otherObject)) {
-            this.handleCollision(otherObject);
-        }
     }
 
     // Check collision with another object.
@@ -452,7 +446,7 @@ class GameObject {
             // Project and render the vertices of the cube.
             const projectedVertices = this.vertices.map((vertex) => this.projectVertex(vertex, camera));
 
-            context.strokeStyle = 'black'; // Example line color
+            context.strokeStyle = 'black'; // Black outline
             context.lineWidth = 2;
 
             for (const faceIndices of this.faces) {
