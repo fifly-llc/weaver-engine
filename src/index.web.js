@@ -2,7 +2,7 @@
  * If a copy of the license was not distributed with this file, You can obtain one at https://fifly.org/FRSL/1.0/. */
 
 class Game {
-    constructor(canvas) {
+    constructor(canvas, cameraPos) {
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
         this.gameObjects = [];
@@ -11,7 +11,7 @@ class Game {
         this.particles = []; // Collection to store particles.
 
         // Initialize the camera.
-        this.camera = new Camera(canvas.width, canvas.height);
+        this.camera = new Camera(canvas.width, canvas.height, cameraPos);
 
         // Add key event listeners.
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -490,16 +490,13 @@ class GameObject {
 }
 
 class Camera {
-    constructor(canvasWidth, canvasHeight) {
+    constructor(canvasWidth, canvasHeight, pos) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
 
-        this.position = { x: 0, y: 0, z: 0 }; // Initialize the camera position.
-        this.target = { x: 0, y: 0, z: -1 }; // Initialize the camera target.
-        this.up = { x: 0, y: 1, z: 0 }; // Initialize the camera's up vector.
+        this.position = pos; // Initialize the camera's position.
+        this.target = new Vector3(0, 0, 0); // Initialize the camera target.
+        this.up = new Vector3(0, 1, 0); // Initialize the camera's up vector.
     }
 
     // Calculate the camera's frustum planes.
