@@ -13,7 +13,7 @@ Weaver Engine is a game engine written in JavaScript designed for use in web gam
 Your JS:
 
 ```js
-import * as weaver from 'https://unpkg.com/weaver-engine/src/index.web.js';
+import * as weaver from 'https://www.unpkg.com/weaver-engine@1.0.9/src/index.web.js';
 
 let canvas = document.getElementById('canvas');
 
