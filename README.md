@@ -1,20 +1,40 @@
 # Weaver Engine
 
+[![npm version](https://badge.fury.io/js/weaver-engine.svg)](https://badge.fury.io/js/weaver-engine)
+![GitHub contributors](https://img.shields.io/github/contributors/fifly-llc/weaver-engine)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/fifly-llc/weaver-engine)
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/fifly-llc/weaver-engine)
+
 Weaver Engine is a game engine written in JavaScript designed for use in web games.
 
 ## Using Weaver Engine
 
-In your JS file add
+Your JS:
 
 ```js
-import 'https://cdn.jsdelivr.net/npm/weaver-engine@latest/src/index.js';
+import * as weaver from 'https://unpkg.com/weaver-engine/src/index.web.js';
 
-let canvas = document.createElement('canvas');
-canvas = document.body.appendChild(canvas);
-canvas.style = "width: 100%; height: 100%; border: none; background-color: white;";
+let canvas = document.getElementById('canvas');
 
-let game = new Game(canvas);
-let cube = new GameObject(0, 0, 0, 10, 10, 10);
+let game = new weaver.Game(canvas);
+let cube = new weaver.GameObject(0, 0, 0, 10, 10, 10);
 game.add(cube);
 game.start();
+```
+
+Your HTML:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weaver Engine Example</title>
+    </head>
+
+    <body>
+        <canvas id="canvas" style="width: 100%; height: 100%; border: none; background-color: white;"></canvas>
+
+        <script type="module" src="script.js"></script>
+    </body>
+</html>
 ```

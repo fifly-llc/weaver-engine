@@ -1,8 +1,6 @@
-import * as weaver from 'https://cdn.jsdelivr.net/npm/weaver-engine@latest/src/index.js';
+import * as weaver from 'https://unpkg.com/weaver-engine/src/index.web.js';
 
-let canvas = document.createElement('canvas');
-canvas = document.body.appendChild(canvas);
-canvas.style = "width: 100%; height: 100%; border: none; background-color: white;";
+let canvas = document.getElementById('canvas');
 
 let game = new weaver.Game(canvas);
 let cube = new weaver.GameObject(0, 0, 0, 10, 10, 10);

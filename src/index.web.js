@@ -201,39 +201,41 @@ class Game {
     }
 
     render() {
-        // Clear the canvas and render game objects here.
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        const { context, canvas, gameObjects } = this;
 
-        this.gameObjects.forEach((gameObject) => {
-            gameObject.render(this.context);
-        });
+        context.clearRect(0, 0, canvas.width, canvas.height);
 
-        this.gameObjects.forEach((gameObject) => {
-            gameObject.renderUI(this.context);
+        gameObjects.forEach(gameObject => {
+            gameObject.render(context);
+            gameObject.renderUI(context);
         });
     }
 
-    add(gameobject) {
-        // Add GameObject
-        this.gameObjects.push([gameobject]);
+    add(gameObject) {
+        this.gameObjects.push(gameObject);
     }
 }
 
 class Asset {
     constructor(type, file) {
         if (type === 'model') {
-            if (!file.endsWith('.obj'))
-                return;
-
-            this.file = fetch(file).then(async res => {
-                const str = await res.text();
-                return str;
-            });
+            if (!file.endsWith('.obj')) return;
+            this.fetchFile(file);
         } else if (type === 'audio') {
-            this.file = Audio(file);
+            this.loadAudio(file);
         } else {
             console.error("Asset type does not exist.");
         }
+    }
+
+    async fetchFile(file) {
+        const response = await fetch(file);
+        const text = await response.text();
+        this.file = text;
+    }
+
+    loadAudio(file) {
+        this.file = Audio(file);
     }
 }
 
@@ -246,47 +248,37 @@ class GameObject {
         this.height = height;
         this.depth = depth;
 
-        // Rendering properties.
         this.visible = true;
-
-        // Mouse and touch input properties.
         this.isMouseDown = false;
         this.touchStartPos = { x: 0, y: 0 };
-
-        // Velocity and acceleration in 3D space.
         this.velocity = { x: 0, y: 0, z: 0 };
         this.acceleration = { x: 0, y: 0, z: 0 };
 
-        // UI properties.
-        this.isUI = false; // Indicates if the object is a UI element.
-        this.text = ''; // Text content for UI elements.
-        this.fontSize = 16; // Font size for text rendering.
-        this.fontFamily = 'Arial'; // Font family for text rendering.
-        this.textColor = 'white'; // Text color.
+        this.isUI = false;
+        this.text = '';
+        this.fontSize = 16;
+        this.fontFamily = 'Arial';
+        this.textColor = 'white';
     }
 
-    // Calculate the AABB (Axis-Aligned Bounding Box) of the object.
     calculateAABB() {
         const halfWidth = this.width / 2;
         const halfHeight = this.height / 2;
         const halfDepth = this.depth / 2;
 
-        // Calculate the AABB's minimum and maximum points in world space.
         const min = new Vector3(
             this.x - halfWidth,
             this.y - halfHeight,
             this.z - halfDepth
         );
+
         const max = new Vector3(
             this.x + halfWidth,
             this.y + halfHeight,
             this.z + halfDepth
         );
 
-        return {
-            min: min,
-            max: max,
-        };
+        return { min, max };
     }
 
     // Create a UI element with text.
