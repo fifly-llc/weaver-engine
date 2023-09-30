@@ -251,14 +251,25 @@ class GameObject {
         this.visible = true;
         this.isMouseDown = false;
         this.touchStartPos = { x: 0, y: 0 };
-        this.velocity = { x: 0, y: 0, z: 0 };
-        this.acceleration = { x: 0, y: 0, z: 0 };
+        this.velocity = new Vector3(0, 0, 0);
+        this.acceleration = new Vector3(0, 0, 0);
 
         this.isUI = false;
         this.text = '';
         this.fontSize = 16;
         this.fontFamily = 'Arial';
         this.textColor = 'white';
+
+        this.vertices = [
+            new Vector3(this.x - this.width / 2, this.y - this.height / 2, this.z - this.depth / 2),
+            new Vector3(this.x + this.width / 2, this.y - this.height / 2, this.z - this.depth / 2),
+            new Vector3(this.x + this.width / 2, this.y + this.height / 2, this.z - this.depth / 2),
+            new Vector3(this.x - this.width / 2, this.y + this.height / 2, this.z - this.depth / 2),
+            new Vector3(this.x - this.width / 2, this.y - this.height / 2, this.z + this.depth / 2),
+            new Vector3(this.x + this.width / 2, this.y - this.height / 2, this.z + this.depth / 2),
+            new Vector3(this.x + this.width / 2, this.y + this.height / 2, this.z + this.depth / 2),
+            new Vector3(this.x - this.width / 2, this.y + this.height / 2, this.z + this.depth / 2),
+        ];
     }
 
     calculateAABB() {
@@ -443,10 +454,9 @@ class GameObject {
 
     render(context, camera) {
         if (this.visible) {
-            // Project and render the vertices of the cube.
             const projectedVertices = this.vertices.map((vertex) => this.projectVertex(vertex, camera));
 
-            context.strokeStyle = 'black'; // Black outline
+            context.strokeStyle = 'black';
             context.lineWidth = 2;
 
             for (const faceIndices of this.faces) {
